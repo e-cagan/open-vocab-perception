@@ -1,0 +1,142 @@
+# ============== Byte-compiled / Optimized / DLL files ==============
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# ============== Distribution / Packaging ==============
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ============== Virtual Environments ==============
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# ============== Testing & Coverage ==============
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# ============== Type Checkers & Linters ==============
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+.ruff_cache/
+
+# ============== Jupyter ==============
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+profile_default/
+ipython_config.py
+
+# ============== Environment Variables ==============
+.env
+.env.local
+.env.*.local
+*.env
+!.env.example
+
+# ============== IDEs & Editors ==============
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+*.sublime-workspace
+*.sublime-project
+
+# ============== OS-specific ==============
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ============== Model Weights & Checkpoints ==============
+weights/*
+!weights/.gitkeep
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.onnx
+*.engine
+*.trt
+*.ckpt
+
+# ============== Datasets ==============
+data/*
+!data/.gitkeep
+*.tar
+*.tar.gz
+*.zip
+*.7z
+*.rar
+
+# ============== Outputs & Artifacts ==============
+outputs/*
+!outputs/.gitkeep
+*.mp4
+*.avi
+*.mov
+*.mkv
+!**/assets/**/*.mp4
+!**/assets/**/*.gif
+
+# ============== Logs ==============
+logs/
+*.log
+wandb/
+lightning_logs/
+mlruns/
+tb_logs/
+runs/
+
+# ============== Cache ==============
+.cache/
+*.cache
+
+# ============== Hugging Face Cache (if symlinked locally) ==============
+.huggingface/
+
+# ============== SAM 2 submodule artifacts ==============
+sam2/checkpoints/*.pt
+third_party/
+
+# ============== Documentation builds ==============
+docs/_build/
+site/
