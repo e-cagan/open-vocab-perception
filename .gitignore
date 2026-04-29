@@ -118,6 +118,9 @@ outputs/*
 !**/assets/**/*.gif
 
 # ============== Logs ==============
+# General testing script
+test.py
+
 logs/
 *.log
 wandb/
