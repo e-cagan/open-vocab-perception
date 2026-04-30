@@ -108,8 +108,6 @@ data/*
 *.rar
 
 # ============== Outputs & Artifacts ==============
-outputs/*
-!outputs/.gitkeep
 *.mp4
 *.avi
 *.mov
