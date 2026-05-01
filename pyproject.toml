@@ -78,8 +78,8 @@ Repository = "https://github.com/e-cagan/open-vocab-perception"
 Issues = "https://github.com/e-cagan/open-vocab-perception/issues"
 
 [project.scripts]
-ovp-image = "ovp.scripts.run_image:main"
-ovp-video = "ovp.scripts.run_video:main"
+ovp-image = "ovp.scripts.run_image:app"
+ovp-video = "ovp.scripts.run_video:app"
 
 [tool.setuptools.packages.find]
 where = ["src"]
