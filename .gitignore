@@ -108,6 +108,8 @@ data/*
 *.rar
 
 # ============== Outputs & Artifacts ==============
+outputs/*
+!outputs/demo_*.jpg
 *.mp4
 *.avi
 *.mov
