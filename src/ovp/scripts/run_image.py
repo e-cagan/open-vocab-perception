@@ -47,7 +47,7 @@ def main(
     
     # Build detector via registry
     # DETECTOR_REGISTRY.create kullan, threshold ve device pas et
-    det_instance = DETECTOR_REGISTRY.create(detector, device=device)
+    det_instance = DETECTOR_REGISTRY.create(detector, device=device, threshold=threshold)
     
     # Build segmenter via registry (if any segmentation)
     seg_instance = None

@@ -18,7 +18,7 @@ class FrameAnnotator:
         box_thickness: int = 2,
         text_scale: float = 0.5,
         text_thickness: int = 1,
-        mask_opacity: float = 0.5,
+        mask_opacity: float = 0.4,
     ) -> None:
         self._box_annotator = sv.BoxAnnotator(thickness=box_thickness)
         self._label_annotator = sv.LabelAnnotator(
