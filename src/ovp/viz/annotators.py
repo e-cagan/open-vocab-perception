@@ -68,11 +68,23 @@ class FrameAnnotator:
             annotated = self._mask_annotator.annotate(annotated, detections_sv)
         annotated = self._box_annotator.annotate(annotated, detections_sv)
         
-        # Annotate the labels on image
-        labels = [
-            f"{d.label} {d.score:.2f}" 
-            for d in frame_result.detections
-        ]
+        # Build track_id lookup if tracks exist
+        track_lookup = {}
+        if frame_result.tracks:
+            track_lookup = {
+                id(t.detection): t.track_id
+                for t in frame_result.tracks
+            }
+
+        # Build labels with optional track ID prefix
+        labels = []
+        for d in frame_result.detections:
+            track_id = track_lookup.get(id(d))
+            if track_id is not None:
+                labels.append(f"#{track_id} {d.label} {d.score:.2f}")
+            else:
+                labels.append(f"{d.label} {d.score:.2f}")
+                
         annotated = self._label_annotator.annotate(
             annotated, detections_sv, labels=labels
         )
