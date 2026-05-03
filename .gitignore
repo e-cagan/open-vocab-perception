@@ -110,6 +110,7 @@ data/*
 # ============== Outputs & Artifacts ==============
 outputs/*
 !outputs/demo_*.jpg
+!outputs/*.gif
 *.mp4
 *.avi
 *.mov
