@@ -19,6 +19,27 @@ class BoundingBox(BaseModel):
     y2: float = Field(ge=0)
     format: Literal["xyxy"] = "xyxy"
 
+    def iou(self, other: "BoundingBox") -> float:
+        """Compute Intersection-over-Union with another bounding box."""
+        # Intersection coordinates
+        ix1 = max(self.x1, other.x1)
+        iy1 = max(self.y1, other.y1)
+        ix2 = min(self.x2, other.x2)
+        iy2 = min(self.y2, other.y2)
+        
+        # No overlap
+        if ix2 <= ix1 or iy2 <= iy1:
+            return 0.0
+        
+        inter_area = (ix2 - ix1) * (iy2 - iy1)
+        
+        # Areas
+        self_area = (self.x2 - self.x1) * (self.y2 - self.y1)
+        other_area = (other.x2 - other.x1) * (other.y2 - other.y1)
+        union_area = self_area + other_area - inter_area
+        
+        return inter_area / union_area if union_area > 0 else 0.0
+
     @model_validator(mode="after")
     def _validate_corner_order(self) -> Self:
         if self.x2 <= self.x1:

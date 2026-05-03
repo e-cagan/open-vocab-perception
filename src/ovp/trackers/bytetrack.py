@@ -7,7 +7,7 @@ import numpy as np
 import supervision as sv
 
 from ovp.core.interfaces import BaseTracker
-from ovp.core.types import Detection, Track
+from ovp.core.types import Detection, Track, BoundingBox
 from ovp.core.registry import TRACKER_REGISTRY
 
 
@@ -133,31 +133,20 @@ class ByteTracker(BaseTracker):
         detections: list[Detection],
         iou_threshold: float = 0.95,
     ) -> Optional[int]:
-        """Find the index of the original detection matching this bbox."""
+        """Find the index of the original detection matching this bbox via IoU."""
+        # Convert numpy bbox to BoundingBox for iou() method
+        tracked = BoundingBox(
+            x1=float(tracked_bbox[0]),
+            y1=float(tracked_bbox[1]),
+            x2=float(tracked_bbox[2]),
+            y2=float(tracked_bbox[3]),
+        )
+        
         best_iou = 0.0
         best_idx = None
         
-        x1, y1, x2, y2 = tracked_bbox
-        
         for i, det in enumerate(detections):
-            # Intersection
-            ix1 = max(x1, det.bbox.x1)
-            iy1 = max(y1, det.bbox.y1)
-            ix2 = min(x2, det.bbox.x2)
-            iy2 = min(y2, det.bbox.y2)
-            
-            if ix2 <= ix1 or iy2 <= iy1:
-                continue
-            
-            inter_area = (ix2 - ix1) * (iy2 - iy1)
-            
-            # Union
-            tracked_area = (x2 - x1) * (y2 - y1)
-            det_area = (det.bbox.x2 - det.bbox.x1) * (det.bbox.y2 - det.bbox.y1)
-            union_area = tracked_area + det_area - inter_area
-            
-            iou = inter_area / union_area if union_area > 0 else 0.0
-            
+            iou = tracked.iou(det.bbox)
             if iou > best_iou:
                 best_iou = iou
                 best_idx = i
