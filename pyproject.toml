@@ -63,6 +63,8 @@ dev = [
     "ruff>=0.6.0",
     "mypy>=1.11.0",
     "pre-commit>=3.8.0",
+    "pycocotools>=2.0.7",     # COCO loading
+    "torchmetrics>=1.0.0",    # mAP / mIoU
 ]
 notebook = [
     "jupyter>=1.0.0",
