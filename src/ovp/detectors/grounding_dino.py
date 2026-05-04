@@ -82,6 +82,7 @@ class GroundingDinoDetector(BaseDetector):
         boxes = result["boxes"].cpu().numpy()
         scores = result["scores"].cpu().numpy()
         text_labels = result["text_labels"]
+        H, W = image.shape[:2]
 
         # Sanity check before iteration
         n = len(boxes)
@@ -89,6 +90,13 @@ class GroundingDinoDetector(BaseDetector):
 
         for box, score, label in zip(boxes, scores, text_labels):
             x1, y1, x2, y2 = box.tolist()
+
+            # Clip to frame bounds (model can produce slightly out-of-frame coords)
+            x1 = max(0.0, min(x1, float(W)))
+            y1 = max(0.0, min(y1, float(H)))
+            x2 = max(0.0, min(x2, float(W)))
+            y2 = max(0.0, min(y2, float(H)))
+
             detections.append(
                 Detection(
                     bbox=BoundingBox(x1=x1, y1=y1, x2=x2, y2=y2),
