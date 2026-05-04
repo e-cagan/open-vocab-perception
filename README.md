@@ -1,6 +1,8 @@
 # Open-Vocabulary Perception (OVP)
 
 ![CI](https://github.com/e-cagan/open-vocab-perception/actions/workflows/ci.yml/badge.svg)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)
 
 > A modular pipeline for **text-prompted object detection, segmentation, and tracking**, combining GroundingDINO (open-vocabulary detection) with SAM 2 (class-agnostic segmentation) and ByteTrack (cross-frame identity). Built with a strict no-vibe-coding philosophy: every component is hand-written, every design decision documented.
 
@@ -349,6 +351,8 @@ docker run --rm --gpus all ovp:latest pytest tests/
 # 98 passed in ~4s
 ```
 
+Continuous integration runs lint (ruff) and tests on every push via GitHub Actions.
+
 ---
 
 ## Roadmap
@@ -364,7 +368,7 @@ docker run --rm --gpus all ovp:latest pytest tests/
 - [x] **Test coverage** with pytest (98 tests, mock-based)
 - [x] **fp16 inference** with autocast (zero accuracy loss, ~50% VRAM savings)
 - [x] **Docker container** for reproducible deployment
-- [ ] **CI/CD** with GitHub Actions
+- [x] **CI/CD** with GitHub Actions (lint + tests)
 - [ ] **NMS post-processing** for crowded scenes
 - [ ] **CLIP-based attribute filter** as optional pipeline stage
 - [ ] **SAM 2 video predictor integration** for inter-keyframe mask propagation
@@ -385,6 +389,7 @@ docker run --rm --gpus all ovp:latest pytest tests/
 - **Video I/O:** OpenCV
 - **Benchmarking:** pycocotools + torchmetrics
 - **Containerization:** Docker (PyTorch 2.5 + CUDA 12.4 base)
+- **CI/CD:** GitHub Actions (ruff + pytest)
 
 ---
 
