@@ -31,6 +31,7 @@ def main(
     keyframe_interval: int = typer.Option(10, "--keyframe-interval", "-k"),
     device: str = typer.Option("cuda", "--device"),
     no_segmenter: bool = typer.Option(False, "--no-segmenter"),
+    fp16: bool = typer.Option(False, "--fp16", help="Use fp16 inference (faster, lower VRAM)"),
     no_tracker: bool = typer.Option(False, "--no-tracker"),
     max_frames: int = typer.Option(0, "--max-frames", help="Limit frames (0 = all)"),
 ) -> None:
@@ -38,14 +39,15 @@ def main(
     
     # Parse prompts
     prompts_list = [p.strip() for p in prompts.split(",") if p.strip()]
+    dtype = "fp16" if fp16 else "fp32"
     console.print(f"[cyan]Prompts:[/cyan] {prompts_list}")
     
     # Build components
-    det_instance = DETECTOR_REGISTRY.create(detector, device=device, threshold=threshold)
-    
+    det_instance = DETECTOR_REGISTRY.create(detector, device=device, threshold=threshold, dtype=dtype)
+
     seg_instance = None
     if not no_segmenter:
-        seg_instance = SEGMENTER_REGISTRY.create(segmenter, device=device)
+        seg_instance = SEGMENTER_REGISTRY.create(segmenter, device=device, dtype=dtype)
     
     track_instance = None
     if not no_tracker:

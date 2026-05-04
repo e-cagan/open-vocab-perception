@@ -103,9 +103,12 @@ def main(
     num_images: int = typer.Option(100, "--num-images", "-n", help="Number of images to evaluate"),
     output: Path = typer.Option(Path("benchmark_results.json"), "--output", "-o"),
     detector_threshold: float = typer.Option(0.3, "--threshold", "-t"),
+    fp16: bool = typer.Option(False, "--fp16", help="Use fp16 inference (faster, lower VRAM)"),
     seed: int = typer.Option(42, "--seed", help="Random seed for image sampling"),
 ) -> None:
     """Run benchmark on COCO val2017."""
+    # Data type check
+    dtype = "fp16" if fp16 else "fp32"
     
     # Validate dataset paths
     ann_file = coco_root / "annotations" / "instances_val2017.json"
@@ -139,8 +142,8 @@ def main(
     
     # Build pipeline
     console.print("[cyan]Building pipeline...[/cyan]")
-    detector = DETECTOR_REGISTRY.create("grounding_dino", threshold=detector_threshold)
-    segmenter = SEGMENTER_REGISTRY.create("sam2")
+    detector = DETECTOR_REGISTRY.create("grounding_dino", threshold=detector_threshold, dtype=dtype)
+    segmenter = SEGMENTER_REGISTRY.create("sam2", dtype=dtype)
     pipeline = ImagePipeline(detector=detector, segmenter=segmenter)
 
     # Initialize metric accumulators

@@ -30,29 +30,30 @@ def main(
     threshold: float = typer.Option(0.3, "--threshold", "-t", help="Detector confidence threshold"),
     device: str = typer.Option("cuda", "--device", help="cuda or cpu"),
     no_segmenter: bool = typer.Option(False, "--no-segmenter", help="Disable segmenter"),
+    fp16: bool = typer.Option(False, "--fp16", help="Use fp16 inference (faster, lower VRAM)"),
 ) -> None:
     """Run perception on a single image and save annotated output."""
     
     # Parse prompts
     # split by comma, strip whitespace, filter empty
     prompts_list = [p.strip() for p in prompts.split(",") if p.strip()]
+    dtype = "fp16" if fp16 else "fp32"
     
     console.print(f"[cyan]Prompts:[/cyan] {prompts_list}")
     
     # Load image
-    # PIL ile aç, RGB convert, numpy'a çevir
     pil_img = Image.open(image).convert("RGB")
     image_np = np.asarray(pil_img)
     console.print(f"[cyan]Image shape:[/cyan] {image_np.shape}")
     
     # Build detector via registry
     # DETECTOR_REGISTRY.create kullan, threshold ve device pas et
-    det_instance = DETECTOR_REGISTRY.create(detector, device=device, threshold=threshold)
+    det_instance = DETECTOR_REGISTRY.create(detector, device=device, threshold=threshold, dtype=dtype)
     
     # Build segmenter via registry (if any segmentation)
     seg_instance = None
     if not no_segmenter:
-        seg_instance = SEGMENTER_REGISTRY.create(segmenter, device=device)
+        seg_instance = SEGMENTER_REGISTRY.create(segmenter, device=device, dtype=dtype)
     
     # Build pipeline
     pipeline = ImagePipeline(detector=det_instance, segmenter=seg_instance)

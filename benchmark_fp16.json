@@ -1,0 +1,1299 @@
+{
+  "config": {
+    "num_images": 100,
+    "detector_threshold": 0.3
+  },
+  "metrics": {
+    "mAP_50": 0.7432931065559387,
+    "mAP_75": 0.5957627296447754,
+    "mAP_50_95": 0.5650516152381897,
+    "mIoU": 0.7711481389520878,
+    "mIoU_std": 0.17539580806584867,
+    "n_matched_detections_for_miou": 519,
+    "n_unmatched_detections": 342,
+    "avg_detections_per_image": 8.876288659793815,
+    "avg_detector_latency_ms": 350.40641218549035,
+    "avg_segmenter_latency_ms": 110.38063190709491,
+    "effective_fps": 2.1701999064866753
+  },
+  "per_image": [
+    {
+      "image_id": 6763,
+      "filename": "000000006763.jpg",
+      "prompts": [
+        "person",
+        "tie",
+        "dining table",
+        "tv",
+        "cell phone"
+      ],
+      "n_detections": 8,
+      "n_ground_truth": 7,
+      "detector_ms": 739.525450999281,
+      "segmenter_ms": 143.37686699946062
+    },
+    {
+      "image_id": 12667,
+      "filename": "000000012667.jpg",
+      "prompts": [
+        "banana"
+      ],
+      "n_detections": 1,
+      "n_ground_truth": 1,
+      "detector_ms": 334.12603000033414,
+      "segmenter_ms": 103.5869819988875
+    },
+    {
+      "image_id": 13546,
+      "filename": "000000013546.jpg",
+      "prompts": [
+        "person",
+        "bench",
+        "skateboard"
+      ],
+      "n_detections": 9,
+      "n_ground_truth": 8,
+      "detector_ms": 373.43118300123024,
+      "segmenter_ms": 114.52945800010639
+    },
+    {
+      "image_id": 13923,
+      "filename": "000000013923.jpg",
+      "prompts": [
+        "bottle",
+        "bowl",
+        "chair",
+        "couch",
+        "potted plant",
+        "dining table",
+        "tv",
+        "vase"
+      ],
+      "n_detections": 20,
+      "n_ground_truth": 19,
+      "detector_ms": 367.5378019997879,
+      "segmenter_ms": 160.0639839998621
+    },
+    {
+      "image_id": 14473,
+      "filename": "000000014473.jpg",
+      "prompts": [
+        "person",
+        "train"
+      ],
+      "n_detections": 9,
+      "n_ground_truth": 8,
+      "detector_ms": 358.0733290000353,
+      "segmenter_ms": 115.11909000000742
+    },
+    {
+      "image_id": 17115,
+      "filename": "000000017115.jpg",
+      "prompts": [
+        "zebra"
+      ],
+      "n_detections": 2,
+      "n_ground_truth": 2,
+      "detector_ms": 351.26675899846305,
+      "segmenter_ms": 79.98638400022173
+    },
+    {
+      "image_id": 51976,
+      "filename": "000000051976.jpg",
+      "prompts": [
+        "person",
+        "surfboard"
+      ],
+      "n_detections": 2,
+      "n_ground_truth": 2,
+      "detector_ms": 362.6206370008731,
+      "segmenter_ms": 83.17521400022088
+    },
+    {
+      "image_id": 52017,
+      "filename": "000000052017.jpg",
+      "prompts": [
+        "person",
+        "airplane"
+      ],
+      "n_detections": 2,
+      "n_ground_truth": 2,
+      "detector_ms": 360.9277479990851,
+      "segmenter_ms": 79.20766999995976
+    },
+    {
+      "image_id": 55167,
+      "filename": "000000055167.jpg",
+      "prompts": [
+        "person",
+        "car",
+        "bus",
+        "truck",
+        "backpack"
+      ],
+      "n_detections": 13,
+      "n_ground_truth": 11,
+      "detector_ms": 373.25601399970765,
+      "segmenter_ms": 169.25473999981477
+    },
+    {
+      "image_id": 59598,
+      "filename": "000000059598.jpg",
+      "prompts": [
+        "person",
+        "banana",
+        "cake",
+        "chair",
+        "laptop",
+        "mouse",
+        "keyboard",
+        "cell phone"
+      ],
+      "n_detections": 14,
+      "n_ground_truth": 10,
+      "detector_ms": 344.4815910006582,
+      "segmenter_ms": 135.6054360003327
+    },
+    {
+      "image_id": 61108,
+      "filename": "000000061108.jpg",
+      "prompts": [
+        "bicycle",
+        "car",
+        "bench",
+        "dog"
+      ],
+      "n_detections": 8,
+      "n_ground_truth": 9,
+      "detector_ms": 333.88507299969206,
+      "segmenter_ms": 111.22264599907794
+    },
+    {
+      "image_id": 61960,
+      "filename": "000000061960.jpg",
+      "prompts": [
+        "person",
+        "bed"
+      ],
+      "n_detections": 3,
+      "n_ground_truth": 4,
+      "detector_ms": 422.53048999918974,
+      "segmenter_ms": 81.04317099969194
+    },
+    {
+      "image_id": 65074,
+      "filename": "000000065074.jpg",
+      "prompts": [
+        "bed",
+        "book"
+      ],
+      "n_detections": 2,
+      "n_ground_truth": 2,
+      "detector_ms": 357.055513000887,
+      "segmenter_ms": 81.25764200121921
+    },
+    {
+      "image_id": 81061,
+      "filename": "000000081061.jpg",
+      "prompts": [
+        "suitcase",
+        "chair",
+        "couch"
+      ],
+      "n_detections": 3,
+      "n_ground_truth": 3,
+      "detector_ms": 352.0221319995471,
+      "segmenter_ms": 84.46419199935917
+    },
+    {
+      "image_id": 82180,
+      "filename": "000000082180.jpg",
+      "prompts": [
+        "chair",
+        "teddy bear"
+      ],
+      "n_detections": 3,
+      "n_ground_truth": 3,
+      "detector_ms": 360.85558100057824,
+      "segmenter_ms": 84.95201699952304
+    },
+    {
+      "image_id": 85772,
+      "filename": "000000085772.jpg",
+      "prompts": [
+        "person",
+        "sports ball",
+        "tennis racket"
+      ],
+      "n_detections": 4,
+      "n_ground_truth": 4,
+      "detector_ms": 360.2586409997457,
+      "segmenter_ms": 90.03665300042485
+    },
+    {
+      "image_id": 88265,
+      "filename": "000000088265.jpg",
+      "prompts": [
+        "horse"
+      ],
+      "n_detections": 1,
+      "n_ground_truth": 1,
+      "detector_ms": 354.1143100010231,
+      "segmenter_ms": 75.79200399959518
+    },
+    {
+      "image_id": 92091,
+      "filename": "000000092091.jpg",
+      "prompts": [
+        "person",
+        "boat",
+        "chair",
+        "couch",
+        "tv",
+        "teddy bear",
+        "toothbrush"
+      ],
+      "n_detections": 11,
+      "n_ground_truth": 9,
+      "detector_ms": 323.6846229992807,
+      "segmenter_ms": 122.5358249994315
+    },
+    {
+      "image_id": 96427,
+      "filename": "000000096427.jpg",
+      "prompts": [
+        "person",
+        "tennis racket"
+      ],
+      "n_detections": 4,
+      "n_ground_truth": 4,
+      "detector_ms": 365.2757769996242,
+      "segmenter_ms": 91.31624099973124
+    },
+    {
+      "image_id": 107087,
+      "filename": "000000107087.jpg",
+      "prompts": [
+        "car",
+        "cat",
+        "chair"
+      ],
+      "n_detections": 5,
+      "n_ground_truth": 3,
+      "detector_ms": 361.8821419986489,
+      "segmenter_ms": 95.43427599965071
+    },
+    {
+      "image_id": 116479,
+      "filename": "000000116479.jpg",
+      "prompts": [
+        "chair",
+        "couch",
+        "bed"
+      ],
+      "n_detections": 3,
+      "n_ground_truth": 3,
+      "detector_ms": 377.27984599951014,
+      "segmenter_ms": 85.65519799958565
+    },
+    {
+      "image_id": 135673,
+      "filename": "000000135673.jpg",
+      "prompts": [
+        "airplane"
+      ],
+      "n_detections": 2,
+      "n_ground_truth": 2,
+      "detector_ms": 363.74057499961054,
+      "segmenter_ms": 80.67389499956334
+    },
+    {
+      "image_id": 142790,
+      "filename": "000000142790.jpg",
+      "prompts": [
+        "person",
+        "skis",
+        "snowboard"
+      ],
+      "n_detections": 5,
+      "n_ground_truth": 4,
+      "detector_ms": 321.63374300034775,
+      "segmenter_ms": 90.86559499883151
+    },
+    {
+      "image_id": 155179,
+      "filename": "000000155179.jpg",
+      "prompts": [
+        "cake",
+        "dining table"
+      ],
+      "n_detections": 2,
+      "n_ground_truth": 2,
+      "detector_ms": 327.2889710005984,
+      "segmenter_ms": 80.70761800081527
+    },
+    {
+      "image_id": 157138,
+      "filename": "000000157138.jpg",
+      "prompts": [
+        "fork",
+        "cake"
+      ],
+      "n_detections": 4,
+      "n_ground_truth": 2,
+      "detector_ms": 340.55398799864633,
+      "segmenter_ms": 84.61141699990549
+    },
+    {
+      "image_id": 157807,
+      "filename": "000000157807.jpg",
+      "prompts": [
+        "cat",
+        "toilet",
+        "sink"
+      ],
+      "n_detections": 4,
+      "n_ground_truth": 3,
+      "detector_ms": 359.51633700096863,
+      "segmenter_ms": 88.46905899918056
+    },
+    {
+      "image_id": 158744,
+      "filename": "000000158744.jpg",
+      "prompts": [
+        "person",
+        "car",
+        "fire hydrant",
+        "suitcase",
+        "chair",
+        "couch"
+      ],
+      "n_detections": 12,
+      "n_ground_truth": 12,
+      "detector_ms": 366.41748900001403,
+      "segmenter_ms": 115.00360799982445
+    },
+    {
+      "image_id": 162035,
+      "filename": "000000162035.jpg",
+      "prompts": [
+        "person",
+        "teddy bear"
+      ],
+      "n_detections": 8,
+      "n_ground_truth": 5,
+      "detector_ms": 327.3575399998663,
+      "segmenter_ms": 96.74749800069549
+    },
+    {
+      "image_id": 163640,
+      "filename": "000000163640.jpg",
+      "prompts": [
+        "person",
+        "backpack",
+        "bowl",
+        "donut"
+      ],
+      "n_detections": 7,
+      "n_ground_truth": 6,
+      "detector_ms": 337.94529200167744,
+      "segmenter_ms": 96.36552600022696
+    },
+    {
+      "image_id": 167159,
+      "filename": "000000167159.jpg",
+      "prompts": [
+        "bed",
+        "book"
+      ],
+      "n_detections": 2,
+      "n_ground_truth": 2,
+      "detector_ms": 323.47150100031286,
+      "segmenter_ms": 77.11784699858981
+    },
+    {
+      "image_id": 172946,
+      "filename": "000000172946.jpg",
+      "prompts": [
+        "person",
+        "tv",
+        "remote"
+      ],
+      "n_detections": 16,
+      "n_ground_truth": 21,
+      "detector_ms": 359.11256200051866,
+      "segmenter_ms": 127.52257399915834
+    },
+    {
+      "image_id": 175535,
+      "filename": "000000175535.jpg",
+      "prompts": [
+        "fork",
+        "knife",
+        "bowl",
+        "sandwich",
+        "dining table"
+      ],
+      "n_detections": 9,
+      "n_ground_truth": 7,
+      "detector_ms": 326.0637929997756,
+      "segmenter_ms": 102.93113999978232
+    },
+    {
+      "image_id": 182417,
+      "filename": "000000182417.jpg",
+      "prompts": [
+        "cup",
+        "spoon",
+        "bowl",
+        "cake",
+        "dining table"
+      ],
+      "n_detections": 10,
+      "n_ground_truth": 8,
+      "detector_ms": 326.9612580006651,
+      "segmenter_ms": 108.19251199973223
+    },
+    {
+      "image_id": 200961,
+      "filename": "000000200961.jpg",
+      "prompts": [
+        "person",
+        "car",
+        "truck",
+        "frisbee"
+      ],
+      "n_detections": 9,
+      "n_ground_truth": 8,
+      "detector_ms": 356.98916200090025,
+      "segmenter_ms": 103.98389100009808
+    },
+    {
+      "image_id": 202339,
+      "filename": "000000202339.jpg",
+      "prompts": [
+        "person",
+        "bus",
+        "handbag",
+        "tie",
+        "suitcase"
+      ],
+      "n_detections": 9,
+      "n_ground_truth": 7,
+      "detector_ms": 324.9869720002607,
+      "segmenter_ms": 106.1549459991511
+    },
+    {
+      "image_id": 210394,
+      "filename": "000000210394.jpg",
+      "prompts": [
+        "person",
+        "bicycle",
+        "motorcycle",
+        "bus"
+      ],
+      "n_detections": 32,
+      "n_ground_truth": 18,
+      "detector_ms": 322.79828999890015,
+      "segmenter_ms": 233.46485600086453
+    },
+    {
+      "image_id": 224200,
+      "filename": "000000224200.jpg",
+      "prompts": [
+        "fire hydrant",
+        "dog"
+      ],
+      "n_detections": 3,
+      "n_ground_truth": 2,
+      "detector_ms": 249.8601660008717,
+      "segmenter_ms": 89.64700099932088
+    },
+    {
+      "image_id": 231580,
+      "filename": "000000231580.jpg",
+      "prompts": [
+        "person",
+        "cow",
+        "chair",
+        "dining table"
+      ],
+      "n_detections": 13,
+      "n_ground_truth": 10,
+      "detector_ms": 349.73266199995123,
+      "segmenter_ms": 134.49641700026405
+    },
+    {
+      "image_id": 231831,
+      "filename": "000000231831.jpg",
+      "prompts": [
+        "cat",
+        "chair",
+        "remote",
+        "cell phone",
+        "book",
+        "scissors"
+      ],
+      "n_detections": 7,
+      "n_ground_truth": 9,
+      "detector_ms": 324.57991399860475,
+      "segmenter_ms": 99.77393400004075
+    },
+    {
+      "image_id": 235241,
+      "filename": "000000235241.jpg",
+      "prompts": [
+        "person",
+        "umbrella",
+        "frisbee"
+      ],
+      "n_detections": 9,
+      "n_ground_truth": 7,
+      "detector_ms": 363.44854299932194,
+      "segmenter_ms": 103.3093159985583
+    },
+    {
+      "image_id": 253386,
+      "filename": "000000253386.jpg",
+      "prompts": [
+        "person",
+        "dog"
+      ],
+      "n_detections": 5,
+      "n_ground_truth": 3,
+      "detector_ms": 361.20781899990106,
+      "segmenter_ms": 88.8697209993552
+    },
+    {
+      "image_id": 254516,
+      "filename": "000000254516.jpg",
+      "prompts": [
+        "person",
+        "bench",
+        "baseball bat"
+      ],
+      "n_detections": 13,
+      "n_ground_truth": 11,
+      "detector_ms": 367.7205860003596,
+      "segmenter_ms": 128.39760099996056
+    },
+    {
+      "image_id": 257624,
+      "filename": "000000257624.jpg",
+      "prompts": [
+        "person",
+        "sports ball"
+      ],
+      "n_detections": 3,
+      "n_ground_truth": 3,
+      "detector_ms": 370.07878800068283,
+      "segmenter_ms": 84.80649199918844
+    },
+    {
+      "image_id": 273198,
+      "filename": "000000273198.jpg",
+      "prompts": [
+        "person",
+        "car",
+        "fire hydrant"
+      ],
+      "n_detections": 5,
+      "n_ground_truth": 5,
+      "detector_ms": 324.425558999792,
+      "segmenter_ms": 90.9207000004244
+    },
+    {
+      "image_id": 276055,
+      "filename": "000000276055.jpg",
+      "prompts": [
+        "person",
+        "umbrella",
+        "bottle",
+        "cup",
+        "carrot",
+        "chair",
+        "dining table"
+      ],
+      "n_detections": 10,
+      "n_ground_truth": 8,
+      "detector_ms": 327.7898300002562,
+      "segmenter_ms": 111.2132020007266
+    },
+    {
+      "image_id": 276707,
+      "filename": "000000276707.jpg",
+      "prompts": [
+        "person",
+        "car"
+      ],
+      "n_detections": 5,
+      "n_ground_truth": 4,
+      "detector_ms": 319.4955540002411,
+      "segmenter_ms": 98.45457699884719
+    },
+    {
+      "image_id": 278973,
+      "filename": "000000278973.jpg",
+      "prompts": [
+        "person",
+        "surfboard"
+      ],
+      "n_detections": 2,
+      "n_ground_truth": 2,
+      "detector_ms": 361.4008719996491,
+      "segmenter_ms": 81.28537599986885
+    },
+    {
+      "image_id": 281693,
+      "filename": "000000281693.jpg",
+      "prompts": [
+        "airplane",
+        "truck"
+      ],
+      "n_detections": 7,
+      "n_ground_truth": 6,
+      "detector_ms": 320.93993999842496,
+      "segmenter_ms": 108.60256500018295
+    },
+    {
+      "image_id": 283070,
+      "filename": "000000283070.jpg",
+      "prompts": [
+        "orange"
+      ],
+      "n_detections": 5,
+      "n_ground_truth": 5,
+      "detector_ms": 368.63968199941155,
+      "segmenter_ms": 92.64712700132804
+    },
+    {
+      "image_id": 286503,
+      "filename": "000000286503.jpg",
+      "prompts": [
+        "person",
+        "elephant"
+      ],
+      "n_detections": 6,
+      "n_ground_truth": 4,
+      "detector_ms": 364.95126399859146,
+      "segmenter_ms": 93.38537999974506
+    },
+    {
+      "image_id": 289960,
+      "filename": "000000289960.jpg",
+      "prompts": [
+        "person",
+        "kite"
+      ],
+      "n_detections": 2,
+      "n_ground_truth": 2,
+      "detector_ms": 323.1596739988163,
+      "segmenter_ms": 82.34480699866253
+    },
+    {
+      "image_id": 290619,
+      "filename": "000000290619.jpg",
+      "prompts": [
+        "banana"
+      ],
+      "n_detections": 1,
+      "n_ground_truth": 1,
+      "detector_ms": 330.3284590001567,
+      "segmenter_ms": 75.31571300023643
+    },
+    {
+      "image_id": 306139,
+      "filename": "000000306139.jpg",
+      "prompts": [
+        "person",
+        "backpack",
+        "bottle",
+        "chair",
+        "dining table",
+        "laptop"
+      ],
+      "n_detections": 33,
+      "n_ground_truth": 26,
+      "detector_ms": 366.99340700033645,
+      "segmenter_ms": 199.36115999917092
+    },
+    {
+      "image_id": 311928,
+      "filename": "000000311928.jpg",
+      "prompts": [
+        "person",
+        "sports ball",
+        "baseball bat"
+      ],
+      "n_detections": 3,
+      "n_ground_truth": 3,
+      "detector_ms": 400.5804280004668,
+      "segmenter_ms": 81.08208299927355
+    },
+    {
+      "image_id": 319369,
+      "filename": "000000319369.jpg",
+      "prompts": [
+        "person",
+        "car",
+        "traffic light",
+        "umbrella",
+        "chair"
+      ],
+      "n_detections": 17,
+      "n_ground_truth": 18,
+      "detector_ms": 372.81608100056474,
+      "segmenter_ms": 138.53888400080905
+    },
+    {
+      "image_id": 322959,
+      "filename": "000000322959.jpg",
+      "prompts": [
+        "fork",
+        "knife",
+        "bowl",
+        "banana",
+        "apple",
+        "orange",
+        "dining table"
+      ],
+      "n_detections": 24,
+      "n_ground_truth": 9,
+      "detector_ms": 255.88682900161075,
+      "segmenter_ms": 200.35362199996598
+    },
+    {
+      "image_id": 323799,
+      "filename": "000000323799.jpg",
+      "prompts": [
+        "person",
+        "frisbee"
+      ],
+      "n_detections": 15,
+      "n_ground_truth": 16,
+      "detector_ms": 331.3522209991788,
+      "segmenter_ms": 142.9997799987177
+    },
+    {
+      "image_id": 327769,
+      "filename": "000000327769.jpg",
+      "prompts": [
+        "cat",
+        "bottle",
+        "cup",
+        "toilet",
+        "sink",
+        "toothbrush"
+      ],
+      "n_detections": 8,
+      "n_ground_truth": 7,
+      "detector_ms": 372.5398070000665,
+      "segmenter_ms": 105.86967199924402
+    },
+    {
+      "image_id": 335081,
+      "filename": "000000335081.jpg",
+      "prompts": [
+        "bird",
+        "teddy bear"
+      ],
+      "n_detections": 14,
+      "n_ground_truth": 4,
+      "detector_ms": 368.7115459997585,
+      "segmenter_ms": 136.2860900007945
+    },
+    {
+      "image_id": 335427,
+      "filename": "000000335427.jpg",
+      "prompts": [
+        "fork",
+        "spoon",
+        "bowl",
+        "broccoli"
+      ],
+      "n_detections": 17,
+      "n_ground_truth": 10,
+      "detector_ms": 354.4337319999613,
+      "segmenter_ms": 133.54298699960054
+    },
+    {
+      "image_id": 359219,
+      "filename": "000000359219.jpg",
+      "prompts": [
+        "fork",
+        "knife",
+        "pizza",
+        "oven"
+      ],
+      "n_detections": 5,
+      "n_ground_truth": 5,
+      "detector_ms": 329.8513390000153,
+      "segmenter_ms": 97.48481099995843
+    },
+    {
+      "image_id": 362434,
+      "filename": "000000362434.jpg",
+      "prompts": [
+        "book",
+        "teddy bear"
+      ],
+      "n_detections": 3,
+      "n_ground_truth": 2,
+      "detector_ms": 337.8183700006048,
+      "segmenter_ms": 82.33338299942261
+    },
+    {
+      "image_id": 363207,
+      "filename": "000000363207.jpg",
+      "prompts": [
+        "person",
+        "wine glass",
+        "bowl",
+        "cake",
+        "dining table"
+      ],
+      "n_detections": 17,
+      "n_ground_truth": 14,
+      "detector_ms": 323.33434599968314,
+      "segmenter_ms": 154.87737900002685
+    },
+    {
+      "image_id": 366611,
+      "filename": "000000366611.jpg",
+      "prompts": [
+        "dog",
+        "sports ball"
+      ],
+      "n_detections": 3,
+      "n_ground_truth": 2,
+      "detector_ms": 333.99358799943,
+      "segmenter_ms": 99.11311299947556
+    },
+    {
+      "image_id": 375493,
+      "filename": "000000375493.jpg",
+      "prompts": [
+        "person",
+        "fire hydrant",
+        "stop sign",
+        "cat",
+        "bottle"
+      ],
+      "n_detections": 6,
+      "n_ground_truth": 7,
+      "detector_ms": 355.4942899991147,
+      "segmenter_ms": 104.57143299936433
+    },
+    {
+      "image_id": 390301,
+      "filename": "000000390301.jpg",
+      "prompts": [
+        "fire hydrant"
+      ],
+      "n_detections": 1,
+      "n_ground_truth": 1,
+      "detector_ms": 341.84985799947754,
+      "segmenter_ms": 76.97392999943986
+    },
+    {
+      "image_id": 391144,
+      "filename": "000000391144.jpg",
+      "prompts": [
+        "elephant"
+      ],
+      "n_detections": 8,
+      "n_ground_truth": 6,
+      "detector_ms": 370.2094799991755,
+      "segmenter_ms": 111.15231700023287
+    },
+    {
+      "image_id": 399764,
+      "filename": "000000399764.jpg",
+      "prompts": [
+        "person",
+        "cow"
+      ],
+      "n_detections": 2,
+      "n_ground_truth": 2,
+      "detector_ms": 372.3534990003827,
+      "segmenter_ms": 80.84514499932993
+    },
+    {
+      "image_id": 413404,
+      "filename": "000000413404.jpg",
+      "prompts": [
+        "person",
+        "bench",
+        "bird",
+        "handbag"
+      ],
+      "n_detections": 8,
+      "n_ground_truth": 12,
+      "detector_ms": 362.6551989982545,
+      "segmenter_ms": 108.41016199992737
+    },
+    {
+      "image_id": 413552,
+      "filename": "000000413552.jpg",
+      "prompts": [
+        "person",
+        "toothbrush"
+      ],
+      "n_detections": 3,
+      "n_ground_truth": 3,
+      "detector_ms": 369.26043899984506,
+      "segmenter_ms": 88.73885700086248
+    },
+    {
+      "image_id": 416837,
+      "filename": "000000416837.jpg",
+      "prompts": [
+        "cow"
+      ],
+      "n_detections": 1,
+      "n_ground_truth": 1,
+      "detector_ms": 360.1104720000876,
+      "segmenter_ms": 75.19453099848761
+    },
+    {
+      "image_id": 424721,
+      "filename": "000000424721.jpg",
+      "prompts": [
+        "apple",
+        "carrot",
+        "chair"
+      ],
+      "n_detections": 18,
+      "n_ground_truth": 7,
+      "detector_ms": 322.73631499992916,
+      "segmenter_ms": 139.94269899922074
+    },
+    {
+      "image_id": 424776,
+      "filename": "000000424776.jpg",
+      "prompts": [
+        "airplane"
+      ],
+      "n_detections": 1,
+      "n_ground_truth": 1,
+      "detector_ms": 368.6831600007281,
+      "segmenter_ms": 73.84914900103468
+    },
+    {
+      "image_id": 430048,
+      "filename": "000000430048.jpg",
+      "prompts": [
+        "car",
+        "clock"
+      ],
+      "n_detections": 4,
+      "n_ground_truth": 2,
+      "detector_ms": 319.77087700033735,
+      "segmenter_ms": 84.48993500132929
+    },
+    {
+      "image_id": 431876,
+      "filename": "000000431876.jpg",
+      "prompts": [
+        "person",
+        "traffic light",
+        "horse",
+        "backpack"
+      ],
+      "n_detections": 20,
+      "n_ground_truth": 11,
+      "detector_ms": 365.6015659998957,
+      "segmenter_ms": 161.321487999885
+    },
+    {
+      "image_id": 453166,
+      "filename": "000000453166.jpg",
+      "prompts": [
+        "person",
+        "tie"
+      ],
+      "n_detections": 8,
+      "n_ground_truth": 8,
+      "detector_ms": 366.87031400106207,
+      "segmenter_ms": 100.19141600059811
+    },
+    {
+      "image_id": 455267,
+      "filename": "000000455267.jpg",
+      "prompts": [
+        "broccoli",
+        "carrot",
+        "oven"
+      ],
+      "n_detections": 26,
+      "n_ground_truth": 15,
+      "detector_ms": 324.53399499900115,
+      "segmenter_ms": 191.67031399956613
+    },
+    {
+      "image_id": 458992,
+      "filename": "000000458992.jpg",
+      "prompts": [
+        "person",
+        "fork",
+        "knife",
+        "pizza"
+      ],
+      "n_detections": 4,
+      "n_ground_truth": 4,
+      "detector_ms": 324.6620970003278,
+      "segmenter_ms": 92.4145219996717
+    },
+    {
+      "image_id": 459809,
+      "filename": "000000459809.jpg",
+      "prompts": [
+        "person",
+        "boat",
+        "kite"
+      ],
+      "n_detections": 8,
+      "n_ground_truth": 8,
+      "detector_ms": 369.0906689989788,
+      "segmenter_ms": 101.376672000697
+    },
+    {
+      "image_id": 462643,
+      "filename": "000000462643.jpg",
+      "prompts": [
+        "person",
+        "cell phone"
+      ],
+      "n_detections": 4,
+      "n_ground_truth": 2,
+      "detector_ms": 364.9109599991789,
+      "segmenter_ms": 96.74924699902476
+    },
+    {
+      "image_id": 466156,
+      "filename": "000000466156.jpg",
+      "prompts": [
+        "car",
+        "cat"
+      ],
+      "n_detections": 5,
+      "n_ground_truth": 5,
+      "detector_ms": 330.7679270001245,
+      "segmenter_ms": 92.2839129998465
+    },
+    {
+      "image_id": 472678,
+      "filename": "000000472678.jpg",
+      "prompts": [
+        "person",
+        "bottle",
+        "chair",
+        "tv",
+        "mouse",
+        "remote",
+        "keyboard",
+        "cell phone",
+        "book"
+      ],
+      "n_detections": 23,
+      "n_ground_truth": 14,
+      "detector_ms": 332.5650039987522,
+      "segmenter_ms": 158.23375600120926
+    },
+    {
+      "image_id": 481480,
+      "filename": "000000481480.jpg",
+      "prompts": [
+        "person",
+        "horse"
+      ],
+      "n_detections": 6,
+      "n_ground_truth": 4,
+      "detector_ms": 351.96216000076674,
+      "segmenter_ms": 101.35690700008126
+    },
+    {
+      "image_id": 486104,
+      "filename": "000000486104.jpg",
+      "prompts": [
+        "person",
+        "bench",
+        "baseball bat",
+        "baseball glove"
+      ],
+      "n_detections": 67,
+      "n_ground_truth": 18,
+      "detector_ms": 331.2512129996321,
+      "segmenter_ms": 317.1987290006655
+    },
+    {
+      "image_id": 490171,
+      "filename": "000000490171.jpg",
+      "prompts": [
+        "person",
+        "dog",
+        "surfboard"
+      ],
+      "n_detections": 4,
+      "n_ground_truth": 3,
+      "detector_ms": 365.41205899993656,
+      "segmenter_ms": 85.77624899953662
+    },
+    {
+      "image_id": 492878,
+      "filename": "000000492878.jpg",
+      "prompts": [
+        "bottle",
+        "cup",
+        "spoon",
+        "sink",
+        "toothbrush"
+      ],
+      "n_detections": 23,
+      "n_ground_truth": 8,
+      "detector_ms": 246.11453299985442,
+      "segmenter_ms": 178.6953339997126
+    },
+    {
+      "image_id": 502347,
+      "filename": "000000502347.jpg",
+      "prompts": [
+        "airplane",
+        "boat"
+      ],
+      "n_detections": 2,
+      "n_ground_truth": 10,
+      "detector_ms": 322.6816009992035,
+      "segmenter_ms": 77.90434700109472
+    },
+    {
+      "image_id": 531134,
+      "filename": "000000531134.jpg",
+      "prompts": [
+        "person",
+        "bicycle",
+        "traffic light",
+        "handbag"
+      ],
+      "n_detections": 16,
+      "n_ground_truth": 14,
+      "detector_ms": 322.96275600128865,
+      "segmenter_ms": 133.2149220015708
+    },
+    {
+      "image_id": 537802,
+      "filename": "000000537802.jpg",
+      "prompts": [
+        "teddy bear"
+      ],
+      "n_detections": 7,
+      "n_ground_truth": 2,
+      "detector_ms": 325.51821900051436,
+      "segmenter_ms": 97.76438300104928
+    },
+    {
+      "image_id": 542776,
+      "filename": "000000542776.jpg",
+      "prompts": [
+        "person",
+        "bird",
+        "bed",
+        "book"
+      ],
+      "n_detections": 4,
+      "n_ground_truth": 4,
+      "detector_ms": 365.82045100112737,
+      "segmenter_ms": 86.38734199848841
+    },
+    {
+      "image_id": 553339,
+      "filename": "000000553339.jpg",
+      "prompts": [
+        "car",
+        "traffic light"
+      ],
+      "n_detections": 5,
+      "n_ground_truth": 7,
+      "detector_ms": 326.83053700020537,
+      "segmenter_ms": 91.15333800036751
+    },
+    {
+      "image_id": 566042,
+      "filename": "000000566042.jpg",
+      "prompts": [
+        "giraffe"
+      ],
+      "n_detections": 7,
+      "n_ground_truth": 6,
+      "detector_ms": 364.3322019997868,
+      "segmenter_ms": 96.44861699962348
+    },
+    {
+      "image_id": 567640,
+      "filename": "000000567640.jpg",
+      "prompts": [
+        "person",
+        "car",
+        "truck",
+        "sports ball"
+      ],
+      "n_detections": 14,
+      "n_ground_truth": 11,
+      "detector_ms": 368.16513200028567,
+      "segmenter_ms": 132.4848069998552
+    },
+    {
+      "image_id": 569030,
+      "filename": "000000569030.jpg",
+      "prompts": [
+        "person",
+        "car",
+        "truck",
+        "traffic light",
+        "fire hydrant",
+        "bench",
+        "backpack",
+        "handbag"
+      ],
+      "n_detections": 32,
+      "n_ground_truth": 24,
+      "detector_ms": 332.4468109985901,
+      "segmenter_ms": 193.79140800083405
+    },
+    {
+      "image_id": 575205,
+      "filename": "000000575205.jpg",
+      "prompts": [
+        "airplane"
+      ],
+      "n_detections": 1,
+      "n_ground_truth": 1,
+      "detector_ms": 356.094294000286,
+      "segmenter_ms": 75.68923399958294
+    },
+    {
+      "image_id": 579818,
+      "filename": "000000579818.jpg",
+      "prompts": [
+        "person",
+        "train"
+      ],
+      "n_detections": 5,
+      "n_ground_truth": 3,
+      "detector_ms": 372.5660700001754,
+      "segmenter_ms": 88.65178799896967
+    },
+    {
+      "image_id": 581100,
+      "filename": "000000581100.jpg",
+      "prompts": [
+        "cow",
+        "giraffe"
+      ],
+      "n_detections": 5,
+      "n_ground_truth": 4,
+      "detector_ms": 320.13867199930246,
+      "segmenter_ms": 96.25383900129236
+    }
+  ]
+}
