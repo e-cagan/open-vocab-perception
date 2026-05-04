@@ -79,6 +79,41 @@ pip install -e ".[notebook]"
 
 ---
 
+## Docker
+
+A Dockerfile is provided for reproducible deployment. The image bundles PyTorch 2.5 + CUDA 12.4, all Python dependencies, the OVP package, and the test suite.
+
+### Build
+
+```bash
+docker build -t ovp:latest .
+```
+
+First build takes ~15 minutes (downloads PyTorch base image and installs dependencies). Subsequent builds use Docker layer cache and finish in seconds when only source code changes.
+
+### Run
+
+The container requires GPU access via `--gpus all` (needs `nvidia-container-toolkit` installed on the host). Volume-mount input/output directories to share files with the container:
+
+```bash
+docker run --rm --gpus all \
+  -v $(pwd)/data/demo_inputs:/workspace/inputs \
+  -v $(pwd)/outputs:/workspace/outputs \
+  ovp:latest \
+  ovp-image -i /workspace/inputs/cats.jpg -p "cat,remote control" -o /workspace/outputs/result.jpg --fp16
+```
+
+Run the test suite inside the container:
+
+```bash
+docker run --rm --gpus all ovp:latest pytest tests/
+# 98 passed in ~4s
+```
+
+The container is self-contained — no Python, CUDA, or PyTorch installation needed on the host beyond NVIDIA drivers and Docker.
+
+---
+
 ## Usage
 
 ### Image Pipeline
@@ -305,6 +340,13 @@ pytest tests/
 # 98 passed in ~3s
 ```
 
+Or run inside the Docker container:
+
+```bash
+docker run --rm --gpus all ovp:latest pytest tests/
+# 98 passed in ~4s
+```
+
 ---
 
 ## Roadmap
@@ -319,11 +361,12 @@ pytest tests/
 - [x] **Quantitative benchmarks** on COCO val2017 (mAP, mIoU, FPS)
 - [x] **Test coverage** with pytest (98 tests, mock-based)
 - [x] **fp16 inference** with autocast (zero accuracy loss, ~50% VRAM savings)
+- [x] **Docker container** for reproducible deployment
+- [ ] **CI/CD** with GitHub Actions
 - [ ] **NMS post-processing** for crowded scenes
 - [ ] **CLIP-based attribute filter** as optional pipeline stage
 - [ ] **SAM 2 video predictor integration** for inter-keyframe mask propagation
-- [ ] **Docker container** for reproducible deployment
-- [ ] **CI/CD** with GitHub Actions
+- [ ] Migrate `supervision.ByteTrack` to its successor (deprecation warning in v0.28+)
 
 ---
 
@@ -339,6 +382,7 @@ pytest tests/
 - **Config:** OmegaConf
 - **Video I/O:** OpenCV
 - **Benchmarking:** pycocotools + torchmetrics
+- **Containerization:** Docker (PyTorch 2.5 + CUDA 12.4 base)
 
 ---
 
