@@ -152,6 +152,12 @@ def main(
     
     # Run benchmark loop
     results = []
+
+    # mIoU accumulators
+    mask_ious = []
+    n_matched_with_mask = 0
+    n_unmatched = 0
+
     with Progress(
         SpinnerColumn(),
         TextColumn("[progress.description]{task.description}"),
@@ -232,6 +238,56 @@ def main(
             # Update metric (accumulates across all images)
             metric_bbox.update(preds, targets)
 
+            # mIoU accumulation
+            if result.segmented is not None:
+                # Build per-class GT lookup for fast matching
+                gt_by_class = {}
+                for gt_box, gt_label, gt_mask in zip(gt["boxes"], gt["labels"], gt["masks"]):
+                    gt_by_class.setdefault(gt_label, []).append({
+                        "box": gt_box,
+                        "mask": gt_mask,
+                    })
+                
+                # Track which GT instances are already matched (no double-matching)
+                used_gt = {label: set() for label in gt_by_class}
+                
+                for sd in result.segmented:
+                    pred_label = sd.detection.label
+                    pred_bbox = sd.detection.bbox
+                    pred_mask = sd.mask.data
+                    
+                    if pred_label not in gt_by_class:
+                        n_unmatched += 1
+                        continue
+                    
+                    # Find the best unmatched GT for this class via bbox IoU
+                    best_iou = 0.0
+                    best_idx = -1
+                    for idx, gt_inst in enumerate(gt_by_class[pred_label]):
+                        if idx in used_gt[pred_label]:
+                            continue
+                        gt_x1, gt_y1, gt_x2, gt_y2 = gt_inst["box"]
+                        gt_bb = BoundingBox(x1=gt_x1, y1=gt_y1, x2=gt_x2, y2=gt_y2)
+                        iou = pred_bbox.iou(gt_bb)
+                        if iou > best_iou:
+                            best_iou = iou
+                            best_idx = idx
+                    
+                    # Match threshold IoU=0.5 (consistent with mAP@0.5)
+                    if best_iou >= 0.5 and best_idx >= 0:
+                        used_gt[pred_label].add(best_idx)
+                        gt_mask = gt_by_class[pred_label][best_idx]["mask"]
+                        
+                        # Compute mask IoU (binary mask intersection / union)
+                        intersection = np.logical_and(pred_mask, gt_mask).sum()
+                        union = np.logical_or(pred_mask, gt_mask).sum()
+                        mask_iou = float(intersection / union) if union > 0 else 0.0
+                        
+                        mask_ious.append(mask_iou)
+                        n_matched_with_mask += 1
+                    else:
+                        n_unmatched += 1
+
             # Record raw stats per image (for JSON)
             results.append({
                 "image_id": int(img_id),
@@ -252,6 +308,14 @@ def main(
     map_overall = float(bbox_metrics["map"])
     map_75 = float(bbox_metrics["map_75"])
 
+    # Compute mIoU
+    if mask_ious:
+        miou = float(np.mean(mask_ious))
+        miou_std = float(np.std(mask_ious))
+    else:
+        miou = 0.0
+        miou_std = 0.0
+
     # Compute latency averages
     avg_detections = float(np.mean([r["n_detections"] for r in results]))
     avg_detector_ms = float(np.mean([r["detector_ms"] for r in results]))
@@ -270,6 +334,10 @@ def main(
                 "mAP_50": map_50,
                 "mAP_75": map_75,
                 "mAP_50_95": map_overall,
+                "mIoU": miou,
+                "mIoU_std": miou_std,
+                "n_matched_detections_for_miou": n_matched_with_mask,
+                "n_unmatched_detections": n_unmatched,
                 "avg_detections_per_image": avg_detections,
                 "avg_detector_latency_ms": avg_detector_ms,
                 "avg_segmenter_latency_ms": avg_segmenter_ms,
@@ -284,6 +352,10 @@ def main(
     console.print(f"  mAP@0.5:      {map_50:.4f}")
     console.print(f"  mAP@0.75:     {map_75:.4f}")
     console.print(f"  mAP@0.5:0.95: {map_overall:.4f}")
+    console.print(f"\n[cyan]Segmentation accuracy:[/cyan]")
+    console.print(f"  mIoU:                    {miou:.4f} ± {miou_std:.4f}")
+    console.print(f"  Matched detections:      {n_matched_with_mask}")
+    console.print(f"  Unmatched detections:    {n_unmatched}")
     console.print(f"\n[cyan]Latency:[/cyan]")
     console.print(f"  Avg detections per image: {avg_detections:.1f}")
     console.print(f"  Avg detector latency:     {avg_detector_ms:.1f} ms")
