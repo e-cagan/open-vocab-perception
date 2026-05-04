@@ -82,6 +82,7 @@ Issues = "https://github.com/e-cagan/open-vocab-perception/issues"
 [project.scripts]
 ovp-image = "ovp.scripts.run_image:app"
 ovp-video = "ovp.scripts.run_video:app"
+ovp-benchmark = "ovp.scripts.benchmark:app"
 
 [tool.setuptools.packages.find]
 where = ["src"]
