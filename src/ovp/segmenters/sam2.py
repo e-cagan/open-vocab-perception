@@ -28,12 +28,21 @@ class Sam2Segmenter(BaseSegmenter):
     ) -> None:
         self._model_id = model_id
         self._device = device
-        self._dtype = dtype
         self._multimask_output = multimask_output
         self._mask_selection = mask_selection
 
+        # Data type conversion
+        if dtype == "fp16":
+            self._torch_dtype = torch.float16
+        elif dtype == "fp32":
+            self._torch_dtype = torch.float32
+        else:
+            raise ValueError("Data type should be 'fp16' or 'fp32'")
+
         # Model and processor
-        self.model = Sam2Model.from_pretrained(model_id).to(device)
+        self.model = Sam2Model.from_pretrained(
+            model_id, dtype=self._torch_dtype
+        ).to(device)
         self.processor = Sam2Processor.from_pretrained(model_id)
 
     def segment(
@@ -55,7 +64,14 @@ class Sam2Segmenter(BaseSegmenter):
 
         # Inference
         inputs = self.processor(image_pil, input_boxes=input_boxes, return_tensors="pt").to(self._device)
-        with torch.no_grad():
+        inputs["pixel_values"] = inputs["pixel_values"].to(self._torch_dtype)
+
+        # No gradients and data type autocasting
+        with torch.no_grad(), torch.autocast(
+            device_type="cuda",
+            dtype=self._torch_dtype,
+            enabled=(self._torch_dtype != torch.float32)
+        ):
             outputs = self.model(**inputs)
 
         # Post process the masks
