@@ -51,7 +51,7 @@ src/ovp/
 ├── pipeline/         # ImagePipeline, VideoPipeline
 ├── viz/              # FrameAnnotator (track-aware)
 ├── io/               # VideoReader, VideoWriter
-└── scripts/          # ovp-image, ovp-video CLI entry points
+└── scripts/          # ovp-image, ovp-video, ovp-benchmark CLI entry points
 ```
 
 ---
@@ -197,39 +197,36 @@ Low threshold produces many low-confidence false positives. High threshold may m
 
 ---
 
-## Limitations
-
-This project is honest about what works and what doesn't.
-
-### Compound queries are weakly enforced
-
-GroundingDINO treats attributes as soft hints, not hard constraints. Querying for `"person wearing white shirt"` will likely match all persons regardless of clothing.
-
-![Compound](outputs/demo_04_compound_queries.jpg)
-
-For attribute-sensitive use cases, consider noun-only prompts followed by a downstream classifier (e.g., CLIP-based filtering on detection crops).
-
-### Crowded scenes lack post-processing
-
-The pipeline currently lacks proper NMS or duplicate suppression. In dense scenes, multiple overlapping bounding boxes for the same person can produce visually noisy mask overlays.
-
-![Crowded](outputs/demo_03_crowded_scene.jpg)
-
-A future version will integrate class-aware NMS in the pipeline orchestrator.
-
-### Bounding boxes are static between keyframes
-
-`VideoPipeline` caches the last keyframe's results between detector calls. Track IDs are preserved by ByteTrack, but bbox coordinates do not update between keyframes — a moving person's box stays in the keyframe position for up to N-1 frames. Visible at low keyframe intervals; reduces with larger keyframe gaps. Future versions will use SAM 2's video predictor for inter-keyframe mask propagation.
-
-### Latency is not real-time on consumer GPUs
-
-Per-frame video pipeline cost is ~65ms on RTX 3050 Ti (with `keyframe_interval=10`), giving ~15 FPS effective throughput. Real-time (30 FPS) requires either a more powerful GPU, larger keyframe intervals, or fp16 inference (planned).
-
----
-
 ## Performance
 
-Benchmarks on RTX 3050 Ti Laptop GPU (4GB VRAM), fp32, 640×480 image / 720×1280 video:
+### Quantitative Benchmark on COCO val2017
+
+Evaluated on a random 100-image sample from COCO val2017 (seed=42), RTX 3050 Ti Laptop GPU, fp32, detector threshold=0.3:
+
+| Metric | Value |
+|---|---|
+| **Detection mAP@0.5** | 0.74 |
+| **Detection mAP@0.75** | 0.60 |
+| **Detection mAP@[0.5:0.95]** | 0.57 |
+| **Segmentation mIoU** | 0.77 ± 0.18 |
+| **Avg latency per image** | ~552 ms |
+| **Effective FPS** | ~1.8 |
+
+#### Methodology
+
+Prompts are built **per-image from the ground-truth class labels** present in that image. For example, an image containing person and bicycle is prompted with `["person", "bicycle"]`. This represents the **informed user** use case — when the operator knows what classes they are looking for. It is an optimistic benchmark; results would be lower under blind prompting where all 80 COCO classes are queried simultaneously.
+
+mIoU is computed over the subset of detections that match a ground-truth instance at bbox IoU≥0.5 (519 of 861 detections in the test sample). Mask IoU is then computed pixel-wise between the predicted mask and the matched ground-truth mask.
+
+Reproduce with:
+
+```bash
+ovp-benchmark --num-images 100 --seed 42 --output benchmark_results.json
+```
+
+### Component Latency (Sandbox)
+
+Single-image inference, isolated component timing on a 640×480 image:
 
 | Component | Latency | VRAM |
 |---|---|---|
@@ -245,6 +242,40 @@ The video pipeline exploits this with a keyframe strategy: detector + segmenter 
 
 ---
 
+## Limitations
+
+This project is honest about what works and what doesn't.
+
+### Compound queries are weakly enforced
+
+GroundingDINO treats attributes as soft hints, not hard constraints. Querying for `"person wearing white shirt"` will likely match all persons regardless of clothing.
+
+![Compound](outputs/demo_04_compound_queries.jpg)
+
+For attribute-sensitive use cases, consider noun-only prompts followed by a downstream classifier (e.g., CLIP-based filtering on detection crops).
+
+### Crowded scenes lack post-processing
+
+The pipeline currently lacks proper NMS or duplicate suppression. In dense scenes, multiple overlapping bounding boxes for the same person can produce visually noisy mask overlays. This is reflected in the benchmark: 342 of 861 detections (≈40%) did not match a ground-truth instance, partly due to duplicate detections counted as false positives.
+
+![Crowded](outputs/demo_03_crowded_scene.jpg)
+
+A future version will integrate class-aware NMS in the pipeline orchestrator.
+
+### Bounding boxes are static between keyframes
+
+`VideoPipeline` caches the last keyframe's results between detector calls. Track IDs are preserved by ByteTrack, but bbox coordinates do not update between keyframes — a moving person's box stays in the keyframe position for up to N-1 frames. Visible at low keyframe intervals; reduces with larger keyframe gaps. Future versions will use SAM 2's video predictor for inter-keyframe mask propagation.
+
+### Latency is not real-time on consumer GPUs
+
+Per-image inference is ~550-600 ms on RTX 3050 Ti (fp32), giving ~1.8 FPS for image mode and ~15 FPS effective for video mode (with `keyframe_interval=10`). Real-time (30 FPS) requires either a more powerful GPU, larger keyframe intervals, or fp16 inference (planned).
+
+### Mask quality varies with object size
+
+Segmentation mIoU is 0.77 ± 0.18, with the high standard deviation reflecting that SAM 2 produces excellent masks for large, well-defined objects (often >0.90 IoU) but can struggle with small or thin objects (sometimes <0.50 IoU). The benchmark sample mIoU is dominated by the larger objects in each scene.
+
+---
+
 ## Sandbox Notebooks
 
 Each model was systematically tested before being wrapped in production classes. The notebooks document threshold sensitivity, latency profiling, and behavioral observations:
@@ -255,21 +286,33 @@ Each model was systematically tested before being wrapped in production classes.
 
 ---
 
+## Testing
+
+The project includes 98 unit and integration tests covering type validation, the component registry, tracker behavior, and pipeline orchestration logic. Real model inference is excluded from automated tests (uses mock detectors and segmenters) to keep the suite fast and CI-friendly.
+
+```bash
+pip install -e ".[dev]"
+pytest tests/
+# 98 passed in ~3s
+```
+
+---
+
 ## Roadmap
 
 - [x] Image pipeline (detector + segmenter)
-- [x] CLI entry points (`ovp-image`, `ovp-video`)
+- [x] CLI entry points (`ovp-image`, `ovp-video`, `ovp-benchmark`)
 - [x] Pydantic-based type system with validation
 - [x] Strategy pattern + registry for component swapping
 - [x] **VideoPipeline** with keyframe strategy
 - [x] **ByteTracker integration** for persistent track IDs
 - [x] **Track-aware visualization** (track IDs in annotated output)
-- [ ] **NMS post-processing** for crowded scenes
+- [x] **Quantitative benchmarks** on COCO val2017 (mAP, mIoU, FPS)
+- [x] **Test coverage** with pytest (98 tests, mock-based)
 - [ ] **fp16 inference** with proper autocast (currently fp32 baseline)
+- [ ] **NMS post-processing** for crowded scenes
 - [ ] **CLIP-based attribute filter** as optional pipeline stage
 - [ ] **SAM 2 video predictor integration** for inter-keyframe mask propagation
-- [ ] **Quantitative benchmarks** on COCO val2017 (mAP@0.5, mIoU, FPS)
-- [ ] **Test coverage** with pytest
 - [ ] **Docker container** for reproducible deployment
 - [ ] **CI/CD** with GitHub Actions
 
@@ -286,6 +329,7 @@ Each model was systematically tested before being wrapped in production classes.
 - **CLI:** Typer + Rich
 - **Config:** OmegaConf
 - **Video I/O:** OpenCV
+- **Benchmarking:** pycocotools + torchmetrics
 
 ---
 
