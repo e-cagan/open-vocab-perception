@@ -1,5 +1,7 @@
 # Open-Vocabulary Perception (OVP)
 
+![CI](https://github.com/e-cagan/open-vocab-perception/actions/workflows/ci.yml/badge.svg)
+
 > A modular pipeline for **text-prompted object detection, segmentation, and tracking**, combining GroundingDINO (open-vocabulary detection) with SAM 2 (class-agnostic segmentation) and ByteTrack (cross-frame identity). Built with a strict no-vibe-coding philosophy: every component is hand-written, every design decision documented.
 
 ![Hero](outputs/demo_video.gif)

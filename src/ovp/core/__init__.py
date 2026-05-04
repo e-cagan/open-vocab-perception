@@ -5,24 +5,24 @@ Core abstractions for the OVP pipeline:
 - registry: Type-safe component registries
 """
 
-from ovp.core.types import (
-    BoundingBox,
-    Detection,
-    Mask,
-    SegmentedDetection,
-    Track,
-    FrameResult,
-)
 from ovp.core.interfaces import (
     BaseDetector,
     BaseSegmenter,
     BaseTracker,
 )
 from ovp.core.registry import (
-    Registry,
     DETECTOR_REGISTRY,
     SEGMENTER_REGISTRY,
     TRACKER_REGISTRY,
+    Registry,
+)
+from ovp.core.types import (
+    BoundingBox,
+    Detection,
+    FrameResult,
+    Mask,
+    SegmentedDetection,
+    Track,
 )
 
 __all__ = [

@@ -3,19 +3,18 @@ Module for image pipeline.
 """
 
 import time
+
 import numpy as np
 
 from ovp.core.interfaces import BaseDetector, BaseSegmenter
-from ovp.core.types import (
-    Detection, Mask, SegmentedDetection, FrameResult
-)
+from ovp.core.types import FrameResult, SegmentedDetection
 
 
 class ImagePipeline:
     """
     Image pipeline class
     """
-    
+
     def __init__(
         self,
         detector: BaseDetector,
@@ -33,11 +32,11 @@ class ImagePipeline:
         # Sanity check: shape validation
         if image.ndim != 3 or image.shape[2] != 3:
             raise ValueError(f"Expected RGB image (H, W, 3), got shape {image.shape}")
-        
+
         # Edge case: empty prompt handling
         if len(prompts) == 0:
             raise ValueError("prompts cannot be empty")
-        
+
         # Detector and latency measurement
         t0 = time.perf_counter()
         detections = self._detector.detect(image, prompts, threshold=detector_threshold)
@@ -53,11 +52,11 @@ class ImagePipeline:
             boxes = [d.bbox for d in detections]
             masks = self._segmenter.segment(image, boxes)
             segmenter_time = (time.perf_counter() - t0) * 1000
-            
+
             # Combine into SegmentedDetection
             segmented_results = [
                 SegmentedDetection(detection=det, mask=mask)
-                for det, mask in zip(detections, masks)
+                for det, mask in zip(detections, masks, strict=True)
             ]
 
         # Create FrameResult and return it after filling the fields
@@ -66,8 +65,8 @@ class ImagePipeline:
             inference_times["segmenter"] = segmenter_time
 
         return FrameResult(
-            frame_id=0,                       # image pipeline singe frame
-            image_shape=image.shape[:2],      # (H, W)
+            frame_id=0,  # image pipeline singe frame
+            image_shape=image.shape[:2],  # (H, W)
             detections=detections,
             segmented=segmented_results,
             prompts=prompts,

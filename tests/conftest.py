@@ -1,14 +1,14 @@
 """Shared pytest fixtures for the test suite."""
 
-import pytest
 import numpy as np
+import pytest
 
 from ovp.core.types import (
-    Detection,
     BoundingBox,
+    Detection,
+    FrameResult,
     Mask,
     SegmentedDetection,
-    FrameResult,
 )
 
 

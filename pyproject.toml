@@ -109,8 +109,10 @@ select = [
     "RUF",  # ruff-specific
 ]
 ignore = [
-    "E501",  # line too long (handled by formatter)
-    "B008",  # function calls in argument defaults (common in DI)
+    "E501",     # line too long (handled by formatter)
+    "B008",     # function calls in argument defaults (common in DI)
+    "RUF003",   # Turkish characters in comments are intentional
+    "RUF022",   # __all__ is grouped semantically, not alphabetically
 ]
 
 [tool.ruff.lint.per-file-ignores]
